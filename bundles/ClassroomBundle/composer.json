@@ -16,5 +16,13 @@
         "psr-4": {
             "Inner\\ClassroomBundle\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Inner\\ClassroomBundle\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.2"
     }
 }

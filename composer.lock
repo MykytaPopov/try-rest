@@ -1401,15 +1401,23 @@
             "dist": {
                 "type": "path",
                 "url": "bundles/ClassroomBundle",
-                "reference": "6e824ac999e70e15395778de5bc3722d567c2bf1"
+                "reference": "2a1ef5cc2aeb65cba80afeec0d439762ec76e3c6"
             },
             "require": {
                 "php": "^7.4"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^5.2"
             },
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Inner\\ClassroomBundle\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Inner\\ClassroomBundle\\Tests\\": "tests/"
                 }
             },
             "license": [

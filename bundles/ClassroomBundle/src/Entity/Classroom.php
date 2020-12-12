@@ -4,18 +4,29 @@ declare(strict_types=1);
 
 namespace Inner\ClassroomBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Inner\ClassroomBundle\Repository\ClassroomRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * The classroom entity
  *
  * @ApiResource(
- *     normalizationContext={"allow_extra_attributes"=false},
+ *     normalizationContext={
+ *         "allow_extra_attributes"=false,
+ *         "groups"={"classroom:read"}
+ *     },
+ *     denormalizationContext={
+ *         "allow_extra_attributes"=false,
+ *         "groups"={"classroom:write"}
+ *     },
  *     collectionOperations={"GET", "POST"},
  *     itemOperations={"GET", "PUT", "DELETE"}
  * )
+ * @ApiFilter(BooleanFilter::class, properties={"isActive"})
  * @ORM\Entity(repositoryClass=ClassroomRepository::class)
  */
 class Classroom
@@ -26,6 +37,7 @@ class Classroom
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"classroom:read"})
      */
     private $id;
 
@@ -33,6 +45,7 @@ class Classroom
      * The unique name of the classroom
      *
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"classroom:read", "classroom:write"})
      */
     private $name;
 
@@ -40,6 +53,7 @@ class Classroom
      * The date of the classroom creation
      *
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @Groups({"classroom:read"})
      */
     private $createdAt;
 
@@ -47,6 +61,7 @@ class Classroom
      * The active status of the classroom
      *
      * @ORM\Column(type="boolean")
+     * @Groups({"classroom:read", "classroom:write"})
      */
     private $isActive;
 
@@ -75,6 +90,13 @@ class Classroom
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     public function getIsActive(): ?bool

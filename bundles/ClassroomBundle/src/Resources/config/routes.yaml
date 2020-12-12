@@ -1,0 +1,4 @@
+classroom:
+  resource: ../../Controller/
+  type: annotation
+  prefix: /api/classrooms

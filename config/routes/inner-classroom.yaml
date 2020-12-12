@@ -1,0 +1,2 @@
+classroom_bundle:
+  resource: '@ClassroomBundle/Resources/config/routes.yaml'

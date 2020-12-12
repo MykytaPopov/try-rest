@@ -28,6 +28,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * )
  * @ApiFilter(BooleanFilter::class, properties={"isActive"})
  * @ORM\Entity(repositoryClass=ClassroomRepository::class)
+ * @ORM\Table(indexes={@ORM\Index(name="isActive_idx", columns={"is_active"})})
  */
 class Classroom
 {

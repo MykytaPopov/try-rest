@@ -35,6 +35,10 @@
         "symfony/validator": "4.4.*",
         "symfony/yaml": "4.4.*"
     },
+    "require-dev": {
+        "symfony/stopwatch": "^4.4",
+        "symfony/web-profiler-bundle": "^4.4"
+    },
     "config": {
         "preferred-install": {
             "*": "dist"

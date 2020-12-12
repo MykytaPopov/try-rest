@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace Inner\ClassroomBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Inner\ClassroomBundle\Repository\ClassroomRepository;
 
 /**
  * The classroom entity
  *
+ * @ApiResource(
+ *     normalizationContext={"allow_extra_attributes"=false},
+ *     collectionOperations={"GET", "POST"},
+ *     itemOperations={"GET", "PUT", "DELETE"}
+ * )
  * @ORM\Entity(repositoryClass=ClassroomRepository::class)
  */
 class Classroom

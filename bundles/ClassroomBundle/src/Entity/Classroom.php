@@ -10,6 +10,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Inner\ClassroomBundle\Repository\ClassroomRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * The classroom entity
@@ -40,15 +41,21 @@ class Classroom
      * @ORM\Column(type="integer")
      * @Groups({"classroom:read"})
      */
-    private $id;
+    private int $id;
 
     /**
      * The unique name of the classroom
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      * @Groups({"classroom:read", "classroom:write"})
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min="3",
+     *     max="50"
+     * )
      */
-    private $name;
+    private string $name;
 
     /**
      * The date of the classroom creation
@@ -56,27 +63,28 @@ class Classroom
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      * @Groups({"classroom:read"})
      */
-    private $createdAt;
+    private \DateTimeInterface $createdAt;
 
     /**
      * The active status of the classroom
      *
      * @ORM\Column(type="boolean")
      * @Groups({"classroom:read", "classroom:write"})
+     * @Assert\NotBlank()
      */
-    private $isActive;
+    private bool $isActive;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -88,7 +96,7 @@ class Classroom
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -100,7 +108,7 @@ class Classroom
         return $this;
     }
 
-    public function getIsActive(): ?bool
+    public function getIsActive(): bool
     {
         return $this->isActive;
     }

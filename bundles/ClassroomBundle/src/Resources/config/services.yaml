@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Inner\ClassroomBundle\Repository\ClassroomRepository:
+    tags: [ 'doctrine.repository_service' ]

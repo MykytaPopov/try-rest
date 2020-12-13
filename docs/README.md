@@ -35,7 +35,7 @@ $ ./bin/console doctrine:migrations:migrate --no-interaction
 Also custom bundle has unit tests to run them
 Go to local bundle folder
 ```bash
-$ cd bundles/ClassroomBundle/
+$ cd bundles/ClassroomBundle
 ```
 Install dependencies for bundle
 ```bash

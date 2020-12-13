@@ -1,0 +1,323 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Classrooms",
+    "description": "Classrooms REST API",
+    "contact": {
+      "email": "mr.mykyta.popov@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/classrooms": {
+      "get": {
+        "summary": "get all classrooms",
+        "responses": {
+          "200": {
+            "description": "List of all available classrooms",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "create new classroom",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Classroom created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassroomItem"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error400"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/api/classrooms/{id}": {
+      "get": {
+        "summary": "get classrooms with specified id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The object identifier",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Classroom",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "resourse not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "update classroom with specified identifier",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The object identifier",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/publicProperties"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Classroom updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassroomItem"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error400"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "resourse not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete classroom with specified identifier",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The object identifier",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Classroom deleted"
+          },
+          "404": {
+            "description": "resourse not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error404"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClassroomItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/sacredProperties"
+          },
+          {
+            "$ref": "#/components/schemas/publicProperties"
+          }
+        ]
+      },
+      "publicProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "My class"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "sacredProperties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-12-13T09:56:10Z"
+          }
+        }
+      },
+      "error400": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "name: This value is already used."
+          }
+        }
+      },
+      "error404": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Classroom not found, id: 50"
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClassroomItem"
+            }
+          }
+        }
+      },
+      "body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/publicProperties"
+          },
+          {
+            "required": [
+              "isActive",
+              "name"
+            ]
+          }
+        ]
+      },
+      "inline_response_200_1": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ClassroomItem"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "pathId": {
+        "name": "id",
+        "in": "path",
+        "description": "The object identifier",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "minimum": 1,
+          "type": "integer",
+          "example": 1
+        }
+      }
+    }
+  }
+}

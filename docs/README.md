@@ -6,6 +6,8 @@ Add new line
 ```bash
 127.0.0.1 try-rest.local
 ```
+Go to the project folder
+
 Create .env configs file
 ```bash
 $ cp .env.example .env

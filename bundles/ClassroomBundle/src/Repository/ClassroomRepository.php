@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Inner\ClassroomBundle\Repository;
 
-use Inner\ClassroomBundle\Entity\Classroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Inner\ClassroomBundle\Entity\Classroom;
 
 /**
  * @method Classroom|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,33 +20,4 @@ class ClassroomRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Classroom::class);
     }
-
-    // /**
-    //  * @return Classroom[] Returns an array of Classroom objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Classroom
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

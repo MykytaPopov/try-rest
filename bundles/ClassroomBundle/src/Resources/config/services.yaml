@@ -3,5 +3,14 @@ services:
         autowire: true
         autoconfigure: true
 
+    Inner\ClassroomBundle\Controller\:
+        resource: '../../../src/Controller'
+        tags: [ 'controller.service_arguments' ]
+
+    Inner\ClassroomBundle\Service\ClassroomService:
+        autowire: true
+
+    Inner\ClassroomBundle\Service\ClassroomServiceInterface: '@Inner\ClassroomBundle\Service\ClassroomService'
+
     Inner\ClassroomBundle\Repository\ClassroomRepository:
         tags: [ 'doctrine.repository_service' ]

@@ -23,6 +23,8 @@
         }
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.2"
+        "symfony/phpunit-bridge": "^5.2",
+        "symfony/orm-pack": "^2.0",
+        "symfony/validator": "^5.2"
     }
 }

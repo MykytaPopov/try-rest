@@ -88,7 +88,7 @@ class Classroom
         return $this->createdAt;
     }
 
-    public function getIsActive(): bool
+    public function isActive(): bool
     {
         return $this->isActive;
     }
